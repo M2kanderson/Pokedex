@@ -1,5 +1,24 @@
 import React from 'react';
 
+const TYPES = [
+  "fire",
+  "electric",
+  "normal",
+  "ghost",
+  "psychic",
+  "water",
+  "bug",
+  "dragon",
+  "grass",
+  "fighting",
+  "ice",
+  "flying",
+  "poison",
+  "ground",
+  "rock",
+  "steel"
+].sort()
+
 class PokemonForm extends React.Component {
   constructor(props) {
     super(props);
@@ -30,6 +49,9 @@ class PokemonForm extends React.Component {
   }
 
   render(){
+    let menu = TYPES.map((type) => (
+      <option value={type} key={type}>{type}</option>
+    ))
     return (
       <form className="pokemon-form" onSubmit={this.createNewPokemon}>
         <input type="text"
@@ -44,10 +66,11 @@ class PokemonForm extends React.Component {
                onChange={this.update("defense")}
                value={this.state.defense}
                placeholder="Defense"></input>
-        <input type="text"
-               onChange={this.update("poke_type")}
-               value={this.state.poke_type}
-               placeholder="Select Pokemon Type"></input>
+        <select onChange={this.update("poke_type")}
+                required>
+          {menu}
+        </select>
+
         <input type="text"
                onChange={this.update("image_url")}
                value={this.state.image_url}
